@@ -32,6 +32,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     int velocityX;
     int velocityY;
     boolean gameOver = false;
+    int highscore =0;
 
     SnakeGame(int boardWidth, int boardHeight){
         this.boardWidth = boardWidth;
@@ -40,22 +41,24 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         setBackground(Color.black);
         addKeyListener(this);
         setFocusable(true);
+        resetGame();
+    }
 
+    public void resetGame(){
         snakeHead = new Tile(5, 5);
         snakeBody = new ArrayList<Tile>();
-
         food = new Tile(10, 10);
         random = new Random();
         placeFood();
 
         velocityX = 0;
         velocityY = 0;
-
+        gameOver = false;
         gameLoop = new Timer(100, this);
         gameLoop.start();
-
     }
 
+    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         draw(g);
@@ -78,7 +81,6 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         g.setColor(Color.green);
        // g.fillRect(snakeHead.x * tileSize, snakeHead.y * tileSize, tileSize, tileSize);
         g.fill3DRect(snakeHead.x * tileSize, snakeHead.y * tileSize, tileSize, tileSize, true);
-
         //SnakeBody
         for (int i = 0; i < snakeBody.size(); i++){
             Tile snakePart = snakeBody.get(i);
@@ -90,10 +92,25 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         g.setFont(new Font("Arial", Font.BOLD, 16));
         if (gameOver){
             g.setColor(Color.red);
-            g.drawString("Game Over: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
+            g.setFont(new Font("Arial", Font.BOLD, 48));
+            g.drawString("Game Over",boardWidth / 2 - 100, boardHeight / 2 - 20); //Centering the Text
+            g.setFont(new Font("Arial", Font.PLAIN, 24));
+            g.drawString("Press 'R' to restart", boardWidth / 2 - 70, boardHeight / 2 + 20); //Centre the text below
+            g.setFont(new Font("Arial", Font.PLAIN, 24));
+            g.drawString("Press 'Q' to Quit", boardWidth / 2 - 70, boardHeight / 2 + 50); // Centre the text below
+            g.drawString("Game Over: "+ String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
+
+
+            //HighScore is updated only if current score exceeds it 
+            if (snakeBody.size() > highscore){
+                highscore = snakeBody.size(); 
+            }
+            g.drawString("High Score: " + highscore, boardWidth - 150, tileSize);
         }
-        else {
-            g.drawString("Score: "+ String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
+        else{
+            g.drawString ("High Score: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
+            g.setColor(Color.white);
+            g.drawString("High Score: " + highscore, boardWidth -150, tileSize);
         }
     }
 
@@ -140,10 +157,16 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             }
         }
 
-        if (snakeHead.x*tileSize < 0 || snakeHead.x*tileSize > boardWidth || snakeHead.y*tileSize < 0 || snakeHead.y*tileSize > boardHeight) {
+        if (snakeHead.x*tileSize < 0 || snakeHead.x*tileSize >  boardWidth || snakeHead.y*tileSize < 0 || snakeHead.y*tileSize > boardHeight) {
             gameOver = true;
         }
+
+    //Update the HighScore if necessary
+    if (snakeBody.size() > highscore){
+        highscore = snakeBody.size();
     }
+}
+
 
 
     @Override
@@ -157,7 +180,10 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_UP && velocityY != 1) {
+        if (gameOver && e.getKeyCode() == KeyEvent.VK_R){
+            resetGame(); //Restart the game when the 'R' key is pressed.
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_UP && velocityY != 1) {
             velocityX = 0;
             velocityY = -1;
         }
@@ -173,6 +199,9 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         else if (e.getKeyCode() == KeyEvent.VK_RIGHT && velocityX != -1) {
             velocityX = 1;
             velocityY = 0;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_Q){
+            System.exit(0); //Exit the game when 'Q' key is pressed.
         }
     }
 
