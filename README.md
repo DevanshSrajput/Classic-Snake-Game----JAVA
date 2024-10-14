@@ -63,8 +63,7 @@ Make sure you have:
 
 ## 📊 Data Flow Diagram
 
-![DFD](path_to_your_dfd_image.png)  
-*Insert your DFD image here to visualize how data flows through the game.*
+![DFD](https://github.com/DevanshSrajput/Classic-Snake-Game----JAVA/blob/main/Data%20Flow%20Diagram%20(DFD).jpg)
 
 ## 🤔 How It Works
 
