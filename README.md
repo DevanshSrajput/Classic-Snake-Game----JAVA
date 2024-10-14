@@ -1,63 +1,92 @@
-# Snake Game
+# 🐍 Snake Game
 
-This is a simple implementation of the classic Snake game using Java and the Swing framework. The game allows players to control a snake that grows in length as it consumes food, while avoiding collisions with itself and the game boundaries.
+Welcome to the world of **Snake**, where you can relive your childhood by guiding a pixelated snake to its food while trying not to eat yourself! This Java-based game combines nostalgia with a sprinkle of coding magic. 
 
-## Features
+## 🎮 Introduction
 
-- **Basic Gameplay**: Control the snake using arrow keys to eat food and grow in length.
-- **Game Over Condition**: The game ends if the snake collides with itself or the boundaries of the game area.
-- **Score Tracking**: The current score is displayed based on the length of the snake, along with a high score that persists across sessions.
-- **Restart Functionality**: Players can restart the game after a game over by pressing the "R" key.
-- **Exit Option**: Quit the game by pressing the "Q" key.
+Remember those days when playing games meant simple graphics and addictive gameplay? Well, this Snake game is here to take you back! Built with Java Swing, it’s all about maneuvering that hungry snake around the screen and gobbling up food while growing longer. Just don’t let it bite itself—nobody likes a self-destructive snake!
 
-## Requirements
+## 🎯 Objective
 
-To run this program, you need:
+The main objective of this project is simple:
+- **Eat food** to grow your snake.
+- **Avoid collisions** with yourself or the walls.
+- **Achieve the highest score** possible and have it saved in a MySQL database for bragging rights!
 
-- Java Development Kit (JDK) installed on your machine.
-- An IDE or text editor to compile and run Java code (e.g., IntelliJ IDEA, Eclipse, or Visual Studio Code).
+## 🌟 Features
 
-## How to Run
+- **Classic Gameplay**: Navigate your snake using arrow keys.
+- **Score Tracking**: Keep track of your score in real-time.
+- **High Score Storage**: Save your high score in a MySQL database (because who doesn't want to show off?).
+- **Game Over Logic**: Know when you’ve messed up (and how badly).
+- **User-Friendly UI**: Simple and clean interface—no fancy stuff, just pure fun!
 
-1. Clone or download this repository to your local machine.
-2. Open a terminal or command prompt and navigate to the directory containing the `SnakeGame.java` file.
-3. Compile the program using:
+## 🚀 Future Scope
+
+What’s next for our slithering friend?
+- **Levels of Difficulty**: Increase the speed as you munch more food!
+- **Sound Effects**: Add some sizzle when you eat (or crash).
+- **Leaderboard**: Compete with friends for the ultimate snake supremacy.
+- **Power-ups**: Because who doesn’t love a little extra help?
+
+## 🛠️ How to Run the Game
+
+### Prerequisites
+Make sure you have:
+- Java Development Kit (JDK) installed.
+- MySQL server running for high score storage.
+
+### Installation Steps
+1. Clone this repository:
    ```bash
-   javac SnakeGame.java
+   git clone https://github.com/DevanshSrajput/Classic-Snake-Game----JAVA.git
    ```
-4. Run the compiled program using:
+2. Navigate to the project directory:
    ```bash
-   java SnakeGame
+   cd Classic-Snake-Game----JAVA
+   ```
+3. Compile the Java files:
+   ```bash
+   javac App.java SnakeGame.java DatabaseManager.java
+   ```
+4. Run the application:
+   ```bash
+   java App
    ```
 
-## Controls
+### Setup Database
+1. Create a MySQL database named `snake_game`.
+2. Create a table named `scores`:
+   ```sql
+   CREATE TABLE scores (id INT AUTO_INCREMENT PRIMARY KEY, score INT);
+   ```
 
-- **Arrow Keys**: Control the direction of the snake (Up, Down, Left, Right).
-- **R**: Restart the game after a game over.
-- **Q**: Quit the game.
+## 📊 Data Flow Diagram
 
-## Game Logic Overview
+![DFD](path_to_your_dfd_image.png)  
+*Insert your DFD image here to visualize how data flows through the game.*
 
-The game's logic is implemented in a single class called `SnakeGame`, which handles:
+## 🤔 How It Works
 
-- Rendering of the game components (snake, food, score).
-- Movement of the snake based on user input.
-- Collision detection for eating food and checking for game over conditions.
+1. **Game Initialization**: The game starts, retrieves the high score from the database, and sets everything up.
+2. **User Input**: Arrow keys control the snake's movement—no joystick needed!
+3. **Game Loop**: Continuously checks for collisions, updates scores, and redraws the game board.
+4. **Database Interaction**: Saves new high scores when achieved and retrieves them at the start of each game.
 
-## Code Structure
+## 📚 How the Database Works
 
-The main components of the code include:
+The game uses a MySQL database to store high scores:
+- When you achieve a new high score, it gets saved in the `scores` table.
+- When starting a new game, it retrieves the highest score from the database so you know what you're up against!
 
-- **Tile Class**: Represents each segment of the snake and food on the board.
-- **Game Loop**: A timer that updates the game state at regular intervals.
-- **Collision Detection**: Checks if the snake has eaten food or collided with itself or walls.
+## 🤖 Contributing
 
-## Future Updates 
+Feel free to fork this repo, make changes, and submit pull requests! Just remember—no biting your own tail!
 
-I plan on adding sounds to this game when the snake eats or dies.
-Please feel free to add the sound feature, I will work on this project again after my End-Sem Exams. 
+## 📄 License
 
-**Package Required**:
-- javax.sound.sampled.*;
-- java.io.File;
-- java.io.IOException;
+This project is licensed under the MIT License—because sharing is caring!
+
+---
+
+Happy gaming! May your snake grow long and your scores be high! 🐍✨
