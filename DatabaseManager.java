@@ -7,7 +7,7 @@ public class DatabaseManager {
     
     private static final String URL = "jdbc:mysql://localhost:3306/snake_game"; // Update with your DB details
     private static final String USER = "root"; // Change to your MySQL username
-    private static final String PASSWORD = "ADGJMPTW"; // Change to your MySQL password
+    private static final String PASSWORD = "password"; // Change to your MySQL password
 
     public DatabaseManager() {
         createTable();
